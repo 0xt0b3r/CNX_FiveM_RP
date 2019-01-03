@@ -1,0 +1,42 @@
+[
+	{
+		"useBackgroundColour" : "false",
+		"backgroundColour" : "20,20,20",
+		"useBackgroundImage" : "true",
+		"backgroundImagePath" : "images/backgroundImg8.jpg",
+		"useTextColour" : "false",
+		"textColour" : "0,0,0",
+		"useBoldText" : "true",
+		"serverTitle" : "Carbanexis Community Server",
+		"playAudioInBackground" : "true",
+		"YTVideoID" : "HPc8QMycGno",
+		"videoVolume" : "5"
+	},
+	{
+		"rule1" : "Be Respectful",
+		"rule2" : "RP is required",
+		"rule3" : "PTT Microphone Required",
+		"rule4" : "No META/Cheating/Exploits",
+		"rule5" : "No Stealing Emergency Vehicles",
+		"rule6" : "No server disruption",
+		"rule7" : "New life rule in effect"
+	},
+	{
+		"servers1" : "Twitter: @_CNXGaming",
+		"servers2" : "Twitch: CarbanexisGaming",
+		"servers3" : "",
+		"servers4" : "",
+		"servers5" : "",
+		"servers6" : "",
+		"servers7" : ""
+	},
+	{
+		"content1" : "1x Police",
+		"content2" : "1x EMT",
+		"content3" : "1x Lost MC",
+		"content4" : "",
+		"content5" : "",
+		"content6" : "",
+		"content7" : ""
+	}
+]
