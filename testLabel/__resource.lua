@@ -1,14 +1,15 @@
 -- Manifest
-resource_manifest_version '77731fab-63ca-442c-a67b-abc70f28dfa5'
+resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
 -- Script Description
-description 'Test Label by Synycyl'
+description 'testLabel Server Maintenance Banner by Synycyl'
 
 -- Client Scripts
 client_scripts {
 	'client.lua'
 }
 
+-- Server Scripts
 server_scripts{
 	'server.lua'
 }
