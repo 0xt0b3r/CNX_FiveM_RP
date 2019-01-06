@@ -13,7 +13,7 @@ end)
 RegisterNetEvent('InDev:Start')
 AddEventHandler('InDev:Start', function()
     while true do
-        drawTxt(1.0, 1.0+0.42, 1.0,1.0,1.0, "| SERVER MAINTENANCE IN PROGRESS |", 255, 255, 0, 255)
+        drawTxt(1.0, 1.0+0.35, 1.0,1.0,1.5, "| SERVER MAINTENANCE IN PROGRESS |", 255, 255, 0, 255)
         
         if cancelBanner then
             cancelBanner = false
