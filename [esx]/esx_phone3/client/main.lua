@@ -477,7 +477,7 @@ Citizen.CreateThread(function()
       DisableControlAction(0, 17,   true) -- Select Prev Weapon
     else
 
-      if IsDisabledControlJustReleased(0, Keys['F1']) then
+      if IsDisabledControlJustReleased(0, Keys['F1']) and GetLastInputMethod(2) then
 
         if not GUI.IsOpen then
           ESX.UI.Menu.CloseAll()
@@ -486,7 +486,7 @@ Citizen.CreateThread(function()
 
       end
 
-      if IsControlJustReleased(0, Keys['E']) and GUI.IsOpen then
+      if IsControlJustReleased(0, Keys['E']) and GetLastInputMethod(2) and GUI.IsOpen then
         
         SendNUIMessage({
           activateGPS = true
