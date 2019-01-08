@@ -31,7 +31,7 @@ Citizen.CreateThread(function()
 		action = 'updateServerInfo',
 
 		maxPlayers = 32,
-		uptime = 'unknown',
+		-- uptime = 'unknown',
 		playTime = '00h 00m'
 	})
 end)
@@ -63,13 +63,13 @@ AddEventHandler('esx_scoreboard:toggleID', function(state)
 	})
 end)
 
-RegisterNetEvent('uptime:tick')
-AddEventHandler('uptime:tick', function(uptime)
-	SendNUIMessage({
-		action = 'updateServerInfo',
-		uptime = uptime
-	})
-end)
+-- RegisterNetEvent('uptime:tick')
+-- AddEventHandler('uptime:tick', function(uptime)
+-- 	SendNUIMessage({
+-- 		action = 'updateServerInfo',
+-- 		uptime = uptime
+-- 	})
+-- end)
 
 function UpdatePlayerTable(connectedPlayers)
 	local formattedPlayerList = {}
@@ -108,7 +108,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 
-		if IsControlJustReleased(0, Keys['F10']) and IsInputDisabled(0) then
+		if IsControlJustReleased(0, 121) and GetLastInputMethod(2) and IsInputDisabled(0) then
 			ToggleScoreBoard()
 			Citizen.Wait(200)
 

@@ -59,9 +59,9 @@ $(function () {
 					$('#max_players').html(event.data.maxPlayers);
 				}
 
-				if (event.data.uptime) {
-					$('#server_uptime').html(event.data.uptime);
-				}
+				// if (event.data.uptime) {
+				// 	$('#server_uptime').html(event.data.uptime);
+				// }
 
 				if (event.data.playTime) {
 					$('#play_time').html(event.data.playTime);

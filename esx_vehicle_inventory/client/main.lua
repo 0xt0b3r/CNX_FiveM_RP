@@ -11,14 +11,14 @@ local Keys = {
 }
 
 
-ESX                           = nil
-local GUI      = {}
-local PlayerData                = {}
-local lastVehicle = nil
-local lastOpen = false
-GUI.Time                      = 0
-local vehiclePlate = {}
-local arrayWeight = Config.localWeight
+ESX					= nil
+local GUI			= {}
+local PlayerData	= {}
+local lastVehicle	= nil
+local lastOpen		= false
+GUI.Time			= 0
+local vehiclePlate 	= {}
+local arrayWeight	= Config.localWeight
 
 function getItemyWeight(item)
   local weight = 0
@@ -84,7 +84,7 @@ Citizen.CreateThread(function()
 
     Wait(0)
 
-    if IsControlPressed(0, Keys["L"]) then
+    if IsControlPressed(0, Keys["L"]) and GetLastInputMethod(2) then
 		local vehFront = VehicleInFront()
 		local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
 		local closecar = GetClosestVehicle(x, y, z, 4.0, 0, 71)
@@ -353,19 +353,19 @@ AddEventHandler('esx_truck_inventory:getInventoryLoaded', function(inventory,wei
 
 
 			    if quantity > 0 and quantity <= tonumber(data.current.count) and vehFront > 0 then
-            if not max then
-              --  VehicleMaxSpeed(vehFront,poid,Config.VehicleLimit[GetVehicleClass(vehFront)])
-               TriggerServerEvent('esx_truck_inventory:removeInventoryItem', GetVehicleNumberPlateText(vehFront), data.current.value, data.current.type, quantity)
-			   local typeVeh = GetVehicleClass(vehFront)
-			   local MaxVh =(tonumber(Config.VehicleLimit[typeVeh])/1000)
-			   local Itemweight =tonumber(getItemyWeight(data.current.value)) * quantity
-			   local totalweight = tonumber(weight) - Itemweight
-			   local Kgweight =  totalweight/1000
-			   ESX.ShowNotification('Total Weight : ~g~'.. Kgweight .. ' Kg / '..MaxVh..' Kg')
+		            if not max then
+		              --  VehicleMaxSpeed(vehFront,poid,Config.VehicleLimit[GetVehicleClass(vehFront)])
+		               TriggerServerEvent('esx_truck_inventory:removeInventoryItem', GetVehicleNumberPlateText(vehFront), data.current.value, data.current.type, quantity)
+					   local typeVeh = GetVehicleClass(vehFront)
+					   local MaxVh =(tonumber(Config.VehicleLimit[typeVeh])/1000)
+					   local Itemweight =tonumber(getItemyWeight(data.current.value)) * quantity
+					   local totalweight = tonumber(weight) - Itemweight
+					   local Kgweight =  totalweight/1000
+					   ESX.ShowNotification('Total Weight : ~g~'.. Kgweight .. ' Kg / '..MaxVh..' Kg')
 
-            else
-              ESX.ShowNotification('~r~ Too much weight')
-            end
+		            else
+		              ESX.ShowNotification('~r~ Too much weight')
+		            end
 			    else
 			      ESX.ShowNotification('~r~ Invalid Quantity')
 			    end
@@ -383,7 +383,7 @@ AddEventHandler('esx_truck_inventory:getInventoryLoaded', function(inventory,wei
 	            end
 			  end,
 			  function(data2, menu2)
-		            TriggerServerEvent("esx_truck_inventory:CloseTrunk", GetVehicleNumberPlateText(vehFront))
+		        TriggerServerEvent("esx_truck_inventory:CloseTrunk", GetVehicleNumberPlateText(vehFront))
 	            SetVehicleDoorShut(vehFrontBack, 5, false)
 			    ESX.UI.Menu.CloseAll()
 			  end
