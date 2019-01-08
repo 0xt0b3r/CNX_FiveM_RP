@@ -7,3 +7,4 @@
 - **L (Near Vehicle)** Vehicle Inventory
 - **F10 (As Police)** Panic Button
 - **F6 (Some Jobs)** Job Action Menu
+- **HOME** Admin Menu (Not sure if this is ES or ESX admin)
