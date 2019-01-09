@@ -32,9 +32,9 @@ Locales['en'] = {
 	['sold_one_opium'] = 'you\'ve sold ~g~x1 opium Baggy~s~',
 	['used_one_opium'] = 'you used 1 pouch of ~b~opium',
 	['exit_marker'] = 'press ~INPUT_CONTEXT~ to cancel the ~y~process~s~',
-	['sold_five_coke'] = 'you\'ve sold ~g~x5 Weed Baggy~s~',
-	['sold_five_meth'] = 'you\'ve sold ~g~x5 Weed Baggy~s~',
-	['sold_five_opium'] = 'you\'ve sold ~g~x5 Weed Baggy~s~',
+	['sold_five_coke'] = 'you\'ve sold ~g~x5 Coke Baggy~s~',
+	['sold_five_meth'] = 'you\'ve sold ~g~x5 Meth Baggy~s~',
+	['sold_five_opium'] = 'you\'ve sold ~g~x5 Opium Baggy~s~',
 	['sold_five_weed'] = 'you\'ve sold ~g~x5 Weed Baggy~s~',
 	-- Blips
 	['coke_field'] = 'cocaine Field',
