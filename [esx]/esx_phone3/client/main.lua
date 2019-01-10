@@ -77,7 +77,13 @@ function OpenPhone()
 
   -- end)
 
-  TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_STAND_MOBILE", 0, true);
+  ESX.SetTimeout(250, function()
+    SetNuiFocus(true, true)
+  end)
+
+  if not IsPedInAnyVehicle(playerPed, false) then
+    TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_STAND_MOBILE", 0, true)
+  end
 
 end
 
@@ -139,7 +145,8 @@ AddEventHandler('esx_phone:addContact', function(name, phoneNumber)
 
   table.insert(PhoneData.contacts, {
     name   = name,
-    number = phoneNumber
+    number = phoneNumber,
+    online = playerOnline
   })
 
   SendNUIMessage({
@@ -155,18 +162,11 @@ AddEventHandler('esx_phone:onMessage', function(phoneNumber, message, position, 
   if job == 'player' then
     ESX.ShowNotification('~b~New Message~s~ : ' .. message)
     PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
-    Citizen.Wait(250)
-    PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
-    Citizen.Wait(250)
-    PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
   else
     ESX.ShowNotification('~b~' .. job .. ': ~s~' .. message)
-    PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
-    Citizen.Wait(250)
-    PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
-    Citizen.Wait(250)
-    PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
   end
+
+  PlaySound(-1, "Menu_Accept", "Phone_SoundSet_Default", 0, 0, 1)
 
   SendNUIMessage({
     newMessage  = true,
@@ -500,31 +500,23 @@ end)
 
 -- Key controls
 Citizen.CreateThread(function()
-
   SetNuiFocus(false)
-
   while true do
-
-    Citizen.Wait(0)
+    Citizen.Wait(10)
 
     if CurrentAction ~= nil then
+      ESX.ShowHelpNotification(CurrentActionMsg)
 
-      SetTextComponentFormat('STRING')
-      AddTextComponentString(CurrentActionMsg)
-      DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-
-      if IsControlJustReleased(0, Keys['E']) then
-
+      if IsControlJustReleased(0, Keys['E']) and GetLastInputMethod(2) then
         if CurrentAction == 'dispatch' then
           TriggerServerEvent('esx_phone:stopDispatch', CurrentDispatchRequestId)
           SetNewWaypoint(CurrentActionData.position.x,  CurrentActionData.position.y)
         end
 
         CurrentAction = nil
-
       end
-
+    else
+      Citizen.Wait(500)
     end
-
   end
 end)

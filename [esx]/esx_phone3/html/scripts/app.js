@@ -109,8 +109,8 @@
 	    	break;
 	    }
 
-/*	    // G
-	    case 71: {
+	    // G
+	    case 69: {
 				
 				if(Phone.current() === 'contact-action-message') {
 					Phone.apps['contact-action-message'].activateGPS()
@@ -118,7 +118,7 @@
 
 	    	break;
 	    }
-*/
+
 
 		}
 
