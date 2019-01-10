@@ -150,7 +150,7 @@ function OpenMecanoActionsMenu()
 					{label = _U('tow_truck'), value = 'towtruck2'}
 				}
 
-				if Config.EnablePlayerManagement and PlayerData.job ~= nil and (PlayerData.job.grade_name == 'boss' or PlayerData.job.grade_name == 'chef' or PlayerData.job.grade_name == 'experimente') then
+				if Config.EnablePlayerManagement and PlayerData.job ~= nil and (PlayerData.job.grade_name == 'boss' or PlayerData.job.grade_name == 'chief' or PlayerData.job.grade_name == 'experimente') then
 					table.insert(elements, {label = 'SlamVan', value = 'slamvan3'})
 				end
 
@@ -169,7 +169,7 @@ function OpenMecanoActionsMenu()
 					else
 						ESX.TriggerServerCallback('esx_service:enableService', function(canTakeService, maxInService, inServiceCount)
 							if canTakeService then
-								ESX.Game.SpawnVehicle(data.current.value, Config.Zones.VehicleSpawnPoint.Pos, 90.0, function(vehicle)
+								ESX.Game.SpawnVehicle(data.current.value, Config.Zones.VehicleSpawnPoint.Pos, 95.73, function(vehicle)
 									local playerPed = PlayerPedId()
 									TaskWarpPedIntoVehicle(playerPed,  vehicle, -1)
 								end)
