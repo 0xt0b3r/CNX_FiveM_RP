@@ -97,8 +97,8 @@
 
 		switch(e.which) {
 
-			// BACKSPACE
-			case 8 : {
+			// ESC
+			case 27 : {
 				Phone.close();
 				break;
 			}
@@ -296,35 +296,6 @@
 		}
 
 	}
-
-	// $('.menu-icon').click(function(event) {
-
-	// 	let id = $(this).attr('id');
-
-	// 	switch(id) {
-
-	// 		case 'menu-icon-contacts' : {
-	// 			showRepertoire();
-	// 			break;
-	// 		}
-
-	// 		case 'menu-icon-messages' : {
-	// 			showMessages();
-	// 			break;
-	// 		}
-
-	// 		default : {
-				
-	// 			let number = $(this).data('number');
-	// 			let name   = $(this).data('name');
-
-	// 			showNewMessage(number, name);
-
-	// 			break;
-	// 		}
-	// 	}
-
-	// });
 
 	window.onload = function(e){
 		window.addEventListener('message', function(event){
