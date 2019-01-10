@@ -169,7 +169,7 @@
 				case 'LEFT'      : Phone.move('LEFT');  break;
 				case 'RIGHT'     : Phone.move('RIGHT'); break;
 				case 'ENTER'     : Phone.enter();       break;
-				case 'BACKSPACE' : Phone.close();       break;
+				case 'ESC' 		 : Phone.close();       break;
 
 				default: break;
 

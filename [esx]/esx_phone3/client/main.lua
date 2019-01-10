@@ -447,11 +447,11 @@ Citizen.CreateThread(function()
         })
       end
 
-      if IsControlJustReleased(0, Keys['BACKSPACE']) then
+      if IsControlJustReleased(0, Keys['ESC']) then
         SendNUIMessage({
           controlPressed = true,
-          control        = 'BACKSPACE'
-        })
+          control        = 'ESC'
+        })`
       end
 
     end
