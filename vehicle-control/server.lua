@@ -72,7 +72,7 @@ end)
 -- R O L L W I N D O W --
 AddEventHandler('chatMessage', function(s, n, m)
 	local message = string.lower(m)
-	if message == "/rollwindow" then
+	if message == "/rw" then
 		CancelEvent()
 		--------------
 		TriggerClientEvent("rollwindow", s)
