@@ -38,7 +38,8 @@ em {
   left: 15px;
   width: 38%;
   height: 530px;
-  background-color: rgba(255, 255, 255, 0);
+  /* background-color: rgba(255, 255, 255, 0); */
+  background: transparent !important;
   -webkit-animation-duration: 2s;
 }
 
