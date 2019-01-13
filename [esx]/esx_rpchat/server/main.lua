@@ -26,8 +26,14 @@ end
 
  AddEventHandler('chatMessage', function(source, name, message)
       if string.sub(message, 1, string.len("/")) ~= "/" then
-          local name = getIdentity(source)
-		TriggerClientEvent("sendProximityMessageMe", -1, source, name.firstname, message)
+    
+        local playerName = GetPlayerName(source)
+        local name = getIdentity(source)
+
+        TriggerClientEvent('chat:addMessage', -1, {
+            template = '<div style="padding: 0.5vw; margin: 0.5vw; background-color: rgba(41, 41, 41, 0.6); border-radius: 3px;"><i class="fas fa-globe"></i> {0}:<br> {1}</div>',
+            args = { playerName, message }
+        })
       end
       CancelEvent()
   end)
@@ -43,12 +49,11 @@ end
   ---    local name = getIdentity(source)
   ---    TriggerClientEvent("sendProximityMessageMe", -1, source, name.firstname, table.concat(args, " "))
   -- end) 
-  TriggerEvent('es:addCommand', 'me', function(source, args, user)
+  RegisterCommand('me', function(source, args, rawCommand)
     local name = getIdentity(source)
-    table.remove(args, 2)
-    TriggerClientEvent('esx-qalle-chat:me', -1, source, name.firstname, table.concat(args, " "))
+    local msg = rawCommand:sub(3)
+    TriggerClientEvent('sendProximityMessageMe', -1, source, name.firstname, msg)
 end)
-
 
  RegisterCommand('tweet', function(source, args, rawCommand)
     local playerName = GetPlayerName(source)
@@ -83,7 +88,7 @@ end, false)
     })
 end, false)
 
-        RegisterCommand('ooc', function(source, args, rawCommand)
+RegisterCommand('ooc', function(source, args, rawCommand)
     local playerName = GetPlayerName(source)
     local msg = rawCommand:sub(5)
     local name = getIdentity(source)
