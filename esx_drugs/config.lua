@@ -53,7 +53,7 @@ Config.Locale = 'en'
 -- Drug Type and Zones info
 Config.Zones = {
 	CokeField =			{x = 2448.92,	y = -1836.80,	z = 51.95,	name = _U('coke_field'),		sprite = 501,	color = 40},
-	CokeProcessing =	{x = -458.13,	y = -2278.61,	z = 7.51,	name = _U('coke_processing'),	sprite = 478,	color = 40},
+	CokeProcessing =	{x = -459.58,	y = -2283.85,	z = 6.61,	name = _U('coke_processing'),	sprite = 478,	color = 40},
 	CokeDealer =		{x = -1786.95,	y = 455.19,		z = 127.31,	name = _U('coke_dealer'),		sprite = 500,	color = 75},
 	MethField =			{x = 1525.29,	y = 1710.02,	z = 109.00,	name = _U('meth_field'),		sprite = 499,	color = 26},
 	MethProcessing =	{x = -1001.41,	y = 4848.00,	z = 274.00,	name = _U('meth_processing'),	sprite = 499,	color = 26},

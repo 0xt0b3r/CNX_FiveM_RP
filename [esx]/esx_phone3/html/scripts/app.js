@@ -109,8 +109,8 @@
 	    	break;
 	    }
 
-	    // G
-	    case 69: {
+/*	    // G
+	    case 71: {
 				
 				if(Phone.current() === 'contact-action-message') {
 					Phone.apps['contact-action-message'].activateGPS()
@@ -118,7 +118,7 @@
 
 	    	break;
 	    }
-
+*/
 
 		}
 
@@ -169,7 +169,7 @@
 				case 'LEFT'      : Phone.move('LEFT');  break;
 				case 'RIGHT'     : Phone.move('RIGHT'); break;
 				case 'ENTER'     : Phone.enter();       break;
-				case 'ESC' 		 : Phone.close();       break;
+				case 'BACKSPACE' : Phone.close();       break;
 
 				default: break;
 
