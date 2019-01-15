@@ -137,7 +137,7 @@ AddEventHandler('drugs:sell', function()
 	elseif copscalled == true and success == false then
 		TriggerClientEvent("pNotify:SetQueueMax", source, "lmao", 5)
 		TriggerClientEvent("pNotify:SendNotification", source, {
-			text = "They are texting the cops",
+			text = "They are not interested",
 			type = "error",
 			progressBar = false,
 			queue = "lmao",
