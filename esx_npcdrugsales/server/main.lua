@@ -151,6 +151,7 @@ end)
 
 RegisterNetEvent('pass_or_fail')
 AddEventHandler('pass_or_fail', function()
+	math.randomseed(GetGameTimer())
 	local percent = math.random(1, 11)
 	if percent == 7 or percent == 8 or percent == 9 then
 		success = false
