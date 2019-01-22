@@ -33,33 +33,6 @@ AddEventHandler('engine',function()
 	end
 end)
 
-RegisterNetEvent('engineoff')
-AddEventHandler('engineoff',function() 
-		local player = GetPlayerPed(-1)
-
-        if (IsPedSittingInAnyVehicle(player)) then 
-            local vehicle = GetVehiclePedIsIn(player,false)
-			engineoff = true
-			ShowNotification("Engine ~r~off~s~.")
-			while (engineoff) do
-			SetVehicleEngineOn(vehicle,false,false,false)
-			SetVehicleUndriveable(vehicle,true)
-			Citizen.Wait(0)
-			end
-		end
-end)
-RegisterNetEvent('engineon')
-AddEventHandler('engineon',function() 
-    local player = GetPlayerPed(-1)
-
-        if (IsPedSittingInAnyVehicle(player)) then 
-            local vehicle = GetVehiclePedIsIn(player,false)
-			engineoff = false
-			SetVehicleUndriveable(vehicle,false)
-			SetVehicleEngineOn(vehicle,true,false,false)
-			ShowNotification("Engine ~g~on~s~.")
-	end
-end)
 -- T R U N K --
 RegisterNetEvent('trunk')
 AddEventHandler('trunk',function() 
@@ -83,29 +56,47 @@ AddEventHandler('trunk',function()
 				ShowNotification("~r~You must be near your vehicle to do that.")
 			end
 end)
--- R E A R  D O O R S --
-RegisterNetEvent('rdoors')
-AddEventHandler('rdoors',function() 
+
+-- T O G G L E  D O O R S --
+RegisterNetEvent('doors')
+AddEventHandler('doors',function(args) 
 	local player = GetPlayerPed(-1)
-    		if controlsave_bool == true then
-				vehicle = saveVehicle
+
+	if controlsave_bool == true then
+		vehicle = saveVehicle
+	else
+		vehicle = GetVehiclePedIsIn(player,true)
+	end
+
+	local isopen = 0
+	if args ~= nil then
+		isopen = GetVehicleDoorAngleRatio(vehicle,args[1])
+	else
+		isopen = GetVehicleDoorAngleRatio(vehicle,0) and GetVehicleDoorAngleRatio(vehicle,1) and GetVehicleDoorAngleRatio(vehicle,2) and GetVehicleDoorAngleRatio(vehicle,3)
+	end
+
+	local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(player), GetEntityCoords(vehicle), 1)
+	
+	if distanceToVeh <= interactionDistance then
+		if (isopen == 0) then
+			if args ~= nil then
+				SetVehicleDoorOpen(vehicle, args[1], 0, 0)
 			else
-				vehicle = GetVehiclePedIsIn(player,true)
-			end
-			local isopen = GetVehicleDoorAngleRatio(vehicle,2) and GetVehicleDoorAngleRatio(vehicle,3)
-			local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(player), GetEntityCoords(vehicle), 1)
-			
-			if distanceToVeh <= interactionDistance then
-				if (isopen == 0) then
+				SetVehicleDoorOpen(vehicle,0,0,0)
+				SetVehicleDoorOpen(vehicle,1,0,0)
 				SetVehicleDoorOpen(vehicle,2,0,0)
 				SetVehicleDoorOpen(vehicle,3,0,0)
-				else
-				SetVehicleDoorShut(vehicle,2,0)
-				SetVehicleDoorShut(vehicle,3,0)
-				end
-			else
-				ShowNotification("~r~You must be near your vehicle to do that.")
 			end
+		else
+			if args ~= nil then
+				SetVehicleDoorShut(vehicle,args[1],0,0)
+			else
+				SetVehicleDoorsShut(vehicle,0)
+			end
+		end
+	else
+		ShowNotification("~r~You must be near your vehicle to do that.")
+	end
 end)		
 
 -- H O O D --
@@ -131,6 +122,7 @@ AddEventHandler('hood',function()
 				ShowNotification("~r~You must be near your vehicle to do that.")
 			end
 end)
+
 -- L O C K --
 RegisterNetEvent('lockLights')
 AddEventHandler('lockLights',function()
@@ -176,6 +168,7 @@ function ShowNotification( text )
     AddTextComponentString( text )
     DrawNotification( false, false )
 end
+
 -- S A V E --
 RegisterNetEvent('save')
 AddEventHandler('save',function() 
@@ -198,6 +191,7 @@ AddEventHandler('save',function()
 		end
 	end
 end)
+
 -- R E M O T E --
 RegisterNetEvent('controlsave')
 AddEventHandler('controlsave',function() 
@@ -217,10 +211,11 @@ AddEventHandler('controlsave',function()
 			end
 		end
 end)
--- R O L L W I N D O W S --
+
+-- T O G G L E  W I N D O W S --
 local windowup = true
 RegisterNetEvent('rollwindow')
-AddEventHandler('rollwindow', function()
+AddEventHandler('rollwindow', function(args)
     local playerPed = GetPlayerPed(-1)
     if IsPedInAnyVehicle(playerPed, false) then
         local playerCar = GetVehiclePedIsIn(playerPed, false)
@@ -228,19 +223,29 @@ AddEventHandler('rollwindow', function()
             SetEntityAsMissionEntity( playerCar, true, true )
 		
 			if ( windowup ) then
-				RollDownWindow(playerCar, 0)
-				RollDownWindow(playerCar, 1)
-				TriggerEvent('chatMessage', '', {255,0,0}, 'Windows down')
+				if args ~= nil then
+					RollDownWindow(playerCar, args[1])
+				else
+					RollDownWindows(playerCar)
+				end
+				--TriggerEvent('chatMessage', '', {255,0,0}, 'Windows down')
 				windowup = false
 			else
-				RollUpWindow(playerCar, 0)
-				RollUpWindow(playerCar, 1)
-				TriggerEvent('chatMessage', '', {255,0,0}, 'Windows up')
+				if args ~= nil then
+					RollUpWindow(playerCar, args[1])
+				else
+					RollUpWindow(playerCar, 0)
+					RollUpWindow(playerCar, 1)
+					RollUpWindow(playerCar, 2)
+					RollUpWindow(playerCar, 3)
+				end
+				--TriggerEvent('chatMessage', '', {255,0,0}, 'Windows up')
 				windowup = true
 			end
 		end
 	end
 end)
+
 -- C O N V E R T I B L E   T O P --
 local topup = true
 RegisterNetEvent('ctop')
@@ -263,6 +268,7 @@ AddEventHandler('ctop', function()
 		end
 	end
 end)
+
 -- M Y P O S --
 RegisterNetEvent('mypos')
 AddEventHandler('mypos',function() 
