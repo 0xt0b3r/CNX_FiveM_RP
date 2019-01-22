@@ -16,8 +16,8 @@ function getIdentity(source)
 			lastname = identity['lastname'],
 			dateofbirth = identity['dateofbirth'],
 			sex = identity['sex'],
-			height = identity['height']
-			
+			height = identity['height'],
+			permission_level = identity['permission_level']
 		}
 	else
 		return nil
@@ -30,10 +30,19 @@ end
         local playerName = GetPlayerName(source)
         local name = getIdentity(source)
 
-        TriggerClientEvent('chat:addMessage', -1, {
-            template = '<div style="padding: 0.5vw; margin: 0.5vw; background-color: rgba(41, 41, 41, 0.6); border-radius: 3px;"><i class="fas fa-globe"></i> {0}:<br> {1}</div>',
-            args = { playerName, message }
-        })
+        if name.permission_level == 4 then
+            ooc = name.firstname .. " [STAFF](OOC)"
+            TriggerClientEvent('chat:addMessage', -1, {
+                template = '<div style="padding: 0.5vw; margin: 0.5vw; background-color: rgba(41, 41, 41, 0.6); border-color: rgba(28, 160, 242, 0.6); border-style: solid; border-width: thin; border-radius: 3px;"><i class="fas fa-globe"></i> {0}:<br> {1}</div>',
+                args = { ooc, message }
+            })
+        else
+            ooc = name.firstname .. " (OOC)"
+            TriggerClientEvent('chat:addMessage', -1, {
+                template = '<div style="padding: 0.5vw; margin: 0.5vw; background-color: rgba(41, 41, 41, 0.6); border-radius: 3px;"><i class="fas fa-globe"></i> {0}:<br> {1}</div>',
+                args = { ooc, message }
+            })
+        end
       end
       CancelEvent()
   end)
