@@ -28,7 +28,9 @@ local emotes = {
 	['hammer'] = "WORLD_HUMAN_HAMMERING",
 	['drill'] = "WORLD_HUMAN_CONST_DRILL",
 	['mechanic'] = "WORLD_HUMAN_VEHICLE_MECHANIC",
-	['fwdlean'] = "PROP_HUMAN_BUM_BIN"
+    ['fwdlean'] = "PROP_HUMAN_BUM_BIN",
+    ['pushups'] = "WORLD_HUMAN_PUSH_UPS",
+    ['situps'] = "WORLD_HUMAN_SIT_UPS"
 }
 
 --[[------------------------------------------------------------------------------------------------
@@ -117,8 +119,9 @@ end)
 Citizen.CreateThread(function()
     while true do
 
-        if emotePlaying then
-            if (IsControlPressed(0, 32) or IsControlPressed(0, 33) or IsControlPressed(0, 34) or IsControlPressed(0, 35)) then
+        
+        if (IsControlPressed(0, 32) or IsControlPressed(0, 33) or IsControlPressed(0, 34) or IsControlPressed(0, 35)) then
+            if emotePlaying then
                 cancelEmote() -- Cancels the emote if the player is moving
             end
         end
