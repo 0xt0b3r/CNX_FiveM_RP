@@ -59,7 +59,7 @@ end)
 
 -- T O G G L E  D O O R S --
 RegisterNetEvent('doors')
-AddEventHandler('doors',function(args) 
+AddEventHandler('doors',function(door) 
 	local player = GetPlayerPed(-1)
 
 	if controlsave_bool == true then
@@ -69,18 +69,18 @@ AddEventHandler('doors',function(args)
 	end
 
 	local isopen = 0
-	if args ~= nil then
-		isopen = GetVehicleDoorAngleRatio(vehicle,args[1])
+	if door ~= nil then
+		isopen = GetVehicleDoorAngleRatio(vehicle,door)
 	else
-		isopen = GetVehicleDoorAngleRatio(vehicle,0) and GetVehicleDoorAngleRatio(vehicle,1) and GetVehicleDoorAngleRatio(vehicle,2) and GetVehicleDoorAngleRatio(vehicle,3)
+		isopen = GetVehicleDoorAngleRatio(vehicle,0) or GetVehicleDoorAngleRatio(vehicle,1) or GetVehicleDoorAngleRatio(vehicle,2) or GetVehicleDoorAngleRatio(vehicle,3)
 	end
 
 	local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(player), GetEntityCoords(vehicle), 1)
 	
 	if distanceToVeh <= interactionDistance then
 		if (isopen == 0) then
-			if args ~= nil then
-				SetVehicleDoorOpen(vehicle, args[1], 0, 0)
+			if door ~= nil then
+				SetVehicleDoorOpen(vehicle, door, 0, 0)
 			else
 				SetVehicleDoorOpen(vehicle,0,0,0)
 				SetVehicleDoorOpen(vehicle,1,0,0)
@@ -88,8 +88,8 @@ AddEventHandler('doors',function(args)
 				SetVehicleDoorOpen(vehicle,3,0,0)
 			end
 		else
-			if args ~= nil then
-				SetVehicleDoorShut(vehicle,args[1],0,0)
+			if door ~= nil then
+				SetVehicleDoorShut(vehicle,door,0,0)
 			else
 				SetVehicleDoorsShut(vehicle,0)
 			end
@@ -215,7 +215,7 @@ end)
 -- T O G G L E  W I N D O W S --
 local windowup = true
 RegisterNetEvent('rollwindow')
-AddEventHandler('rollwindow', function(args)
+AddEventHandler('rollwindow', function(window)
     local playerPed = GetPlayerPed(-1)
     if IsPedInAnyVehicle(playerPed, false) then
         local playerCar = GetVehiclePedIsIn(playerPed, false)
@@ -223,16 +223,16 @@ AddEventHandler('rollwindow', function(args)
             SetEntityAsMissionEntity( playerCar, true, true )
 		
 			if ( windowup ) then
-				if args ~= nil then
-					RollDownWindow(playerCar, args[1])
+				if window ~= nil then
+					RollDownWindow(playerCar, window)
 				else
 					RollDownWindows(playerCar)
 				end
 				--TriggerEvent('chatMessage', '', {255,0,0}, 'Windows down')
 				windowup = false
 			else
-				if args ~= nil then
-					RollUpWindow(playerCar, args[1])
+				if window ~= nil then
+					RollUpWindow(playerCar, window)
 				else
 					RollUpWindow(playerCar, 0)
 					RollUpWindow(playerCar, 1)
@@ -276,4 +276,9 @@ AddEventHandler('mypos',function()
 	local pos = GetEntityCoords(ped, true)
 	local heading = GetEntityHeading(ped)
 	TriggerEvent('chatMessage', '', {255,255,255}, 'Pos X: ' .. pos.x .. ' Pos Y: ' .. pos.y .. ' Pos Z: ' .. pos.z .. ' Heading: ' .. heading)
+end)
+
+Citizen.CreateThread(function()
+	TriggerEvent('chat:addSuggestion', '/rw', 'Toggle Window(s) up/down', {{ name="window", help="No arguments = All Windows; 0 = Front Driver; 1 = Front Passenger; 2 = Rear Driver; 3 = Rear Passenger"}})
+	TriggerEvent('chat:addSuggestion', '/doors', 'Toggle Door(s) open/closed', {{ name="doors", help="No arguments = All Doors; 0 = Front Driver; 1 = Front Passenger; 2 = Rear Driver; 3 = Rear Passenger"}})
 end)
