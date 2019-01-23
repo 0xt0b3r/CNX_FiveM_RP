@@ -8,8 +8,3 @@ description 'CNX_Indicators by Synycyl'
 client_scripts{
     'client/main.lua'
 }
-
--- Server Scripts
--- server_scripts{
---     'server/main.lua'
--- }
