@@ -680,10 +680,10 @@ end
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-		if IsControlJustPressed(1, Keys["BACKSPACE"]) then -- Si touche retour on cache
+		if IsControlJustReleased(0, 177) and GetLastInputMethod(2) then -- Si touche retour on cache
 			Menu.hidden = true
 		end
-        if IsControlJustPressed(1, Keys["M"]) then --Modifier L'ouverture du Menu Ici ! Touche F3 de base.
+        if IsControlJustReleased(0, 244) and GetLastInputMethod(2) then --Modifier L'ouverture du Menu Ici ! Touche F3 de base.
             DemarchesMenu()
 			-- Menu to draw
             Menu.hidden = not Menu.hidden -- Hide/Show the menu
